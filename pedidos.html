@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos - Pocket Wave</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left" id="nav-user"></div>
+            <ul>
+                <li><a href="/">INICIO</a></li>
+                <li><a href="/#especificacoes">ESPECIFICAÇÕES</a></li>
+                <li><a href="/checkout.html">COMPRAR</a></li>
+                <li><a href="/pedidos.html" id="nav-pedidos">PEDIDOS</a></li>
+                <li><a href="#" class="btn-login" id="btn-open-login">ENTRAR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="pedidos-section">
+        <div class="pedidos-container">
+            <h2>Todos os Pedidos</h2>
+            <div id="pedidos-lista" class="pedidos-lista">
+                <p class="loading">Carregando pedidos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Login / Registro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="btn-close-login">&times;</span>
+
+            <div id="form-login">
+                <h2>Entrar</h2>
+                <input type="text" id="login-usuario" placeholder="Usuário ou Email">
+                <input type="password" id="login-senha" placeholder="Senha">
+                <button id="btn-login-submit">Entrar</button>
+                <p class="toggle-form">Não tem conta? <a href="#" id="link-register">Criar conta</a></p>
+                <p id="login-msg" class="msg"></p>
+            </div>
+
+            <div id="form-register" style="display:none;">
+                <h2>Criar Conta</h2>
+                <input type="email" id="reg-email" placeholder="Email">
+                <input type="tel" id="reg-telefone" placeholder="Telefone">
+                <input type="text" id="reg-usuario" placeholder="Nome de usuário">
+                <input type="password" id="reg-senha" placeholder="Senha">
+                <button id="btn-register-submit">Criar Conta</button>
+                <p class="toggle-form">Já tem conta? <a href="#" id="link-login">Entrar</a></p>
+                <p id="register-msg" class="msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Verifica se é admin
+        const usuarioLogado = localStorage.getItem('pocketwave_user');
+        if (usuarioLogado !== 'Adimin') {
+            window.location.href = '/';
+        }
+
+        // Carrega pedidos
+        async function carregarPedidos() {
+            const lista = document.getElementById('pedidos-lista');
+            try {
+                const res = await fetch('/api/pedidos');
+                const pedidos = await res.json();
+                
+                if (pedidos.length === 0) {
+                    lista.innerHTML = '<p class="sem-pedidos">Nenhum pedido encontrado.</p>';
+                    return;
+                }
+
+                lista.innerHTML = pedidos.map((pedido, index) => `
+                    <div class="pedido-card" id="pedido-${index}">
+                        <div class="pedido-header">
+                            <span class="pedido-numero">#${index + 1}</span>
+                            <span class="pedido-data">${new Date(pedido.data).toLocaleString('pt-BR')}</span>
+                        </div>
+                        <div class="pedido-info">
+                            <p><strong>Cliente:</strong> ${pedido.nome}</p>
+                            <p><strong>Usuário:</strong> ${pedido.usuario}</p>
+                            <p><strong>Produto:</strong> ${pedido.produto}</p>
+                            <p><strong>Pagamento:</strong> ${pedido.pagamento.toUpperCase()}</p>
+                        </div>
+                        <button class="btn-entregue" onclick="removerPedido(${index})">Entregue</button>
+                    </div>
+                `).join('');
+            } catch (e) {
+                lista.innerHTML = '<p class="error">Erro ao carregar pedidos.</p>';
+            }
+        }
+
+        async function removerPedido(index) {
+            if (!confirm('Marcar este pedido como entregue e removê-lo?')) return;
+            try {
+                const res = await fetch(`/api/pedido/${index}`, { method: 'DELETE' });
+                if (res.ok) {
+                    document.getElementById(`pedido-${index}`).remove();
+                    // Recarrega para reordenar os números
+                    carregarPedidos();
+                } else {
+                    alert('Erro ao remover pedido.');
+                }
+            } catch (e) {
+                alert('Erro ao remover pedido.');
+            }
+        }
+
+        carregarPedidos();
+    </script>
+</body>
+</html>
+

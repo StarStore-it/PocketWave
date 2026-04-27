@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Pocket Wave</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left" id="nav-user"></div>
+            <ul>
+                <li><a href="/">INICIO</a></li>
+                <li><a href="/#especificacoes">ESPECIFICAÇÕES</a></li>
+                <li><a href="/checkout.html">COMPRAR</a></li>
+                <li><a href="/pedidos.html" id="nav-pedidos" style="display:none;">PEDIDOS</a></li>
+                <li><a href="#" class="btn-login" id="btn-open-login">ENTRAR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="checkout-section">
+        <div class="checkout-container">
+            <h2>Finalizar Compra</h2>
+            <p class="checkout-subtitle">Pocket Wave - Micro-ondas Portátil</p>
+            
+            <form id="checkout-form">
+                <label for="checkout-nome">Nome Completo</label>
+                <input type="text" id="checkout-nome" placeholder="Digite seu nome completo" required>
+
+                <label>Meio de Pagamento</label>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="pagamento" value="pix" checked>
+                        <span>PIX</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="pagamento" value="debito">
+                        <span>Débito</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="pagamento" value="credito">
+                        <span>Crédito 1x</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
+                <p id="checkout-msg" class="msg"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modal Login / Registro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="btn-close-login">&times;</span>
+
+            <div id="form-login">
+                <h2>Entrar</h2>
+                <input type="text" id="login-usuario" placeholder="Usuário ou Email">
+                <input type="password" id="login-senha" placeholder="Senha">
+                <button id="btn-login-submit">Entrar</button>
+                <p class="toggle-form">Não tem conta? <a href="#" id="link-register">Criar conta</a></p>
+                <p id="login-msg" class="msg"></p>
+            </div>
+
+            <div id="form-register" style="display:none;">
+                <h2>Criar Conta</h2>
+                <input type="email" id="reg-email" placeholder="Email">
+                <input type="tel" id="reg-telefone" placeholder="Telefone">
+                <input type="text" id="reg-usuario" placeholder="Nome de usuário">
+                <input type="password" id="reg-senha" placeholder="Senha">
+                <button id="btn-register-submit">Criar Conta</button>
+                <p class="toggle-form">Já tem conta? <a href="#" id="link-login">Entrar</a></p>
+                <p id="register-msg" class="msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Checkout specific logic
+        const checkoutForm = document.getElementById('checkout-form');
+        const checkoutMsg = document.getElementById('checkout-msg');
+
+        checkoutForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nome = document.getElementById('checkout-nome').value.trim();
+            const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
+            const usuario = localStorage.getItem('pocketwave_user');
+
+            if (!nome) {
+                checkoutMsg.textContent = 'Preencha seu nome.';
+                checkoutMsg.className = 'msg error';
+                return;
+            }
+
+            const result = await apiPost('/api/pedido', { usuario, nome, pagamento, produto: 'Pocket Wave' });
+            if (result.ok) {
+                checkoutMsg.textContent = 'Pedido realizado com sucesso!';
+                checkoutMsg.className = 'msg success';
+                checkoutForm.reset();
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1500);
+            } else {
+                checkoutMsg.textContent = result.data.error || 'Erro ao finalizar pedido.';
+                checkoutMsg.className = 'msg error';
+            }
+        });
+    </script>
+</body>
+</html>
+

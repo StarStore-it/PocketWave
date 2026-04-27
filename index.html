@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pocket Wave</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav-left" id="nav-user"></div>
+            <ul>
+                <li><a href="/">INICIO</a></li>
+                <li><a href="#especificacoes">ESPECIFICAÇÕES</a></li>
+                <li><a href="/checkout.html" id="nav-comprar">COMPRAR</a></li>
+                <li><a href="/pedidos.html" id="nav-pedidos" style="display:none;">PEDIDOS</a></li>
+                <li><a href="#" class="btn-login" id="btn-open-login">ENTRAR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="content">
+            <h2>Sinta o Calor.</h2>
+            <h1>A Revolução da<br> Culinária<br> Portátil Chegou.</h1>
+
+            <p>
+                Micro-ondas de bolso compacto e leve.<br>
+                Aquecimento rápido, eficiente e alimentado por<br>
+                energia solar. O “POCKET-WAVE” é único.
+            </p>
+
+            <a href="/checkout.html" class="btn-comprar" id="btn-comprar-hero">COMPRAR AGORA</a>
+        </div>
+    </section>
+
+    <!-- Seção Especificações -->
+    <section class="especificacoes" id="especificacoes">
+        <div class="especificacoes-content">
+            <h2>Especificações Técnicas</h2>
+            <div class="specs-grid">
+                <div class="spec-item">
+                    <span class="spec-valor">9 × 6 cm</span>
+                    <span class="spec-label">Dimensões</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">180 g</span>
+                    <span class="spec-label">Peso</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">90 s</span>
+                    <span class="spec-label">Aquecimento</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">8 h</span>
+                    <span class="spec-label">Bateria</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">Painel Solar</span>
+                    <span class="spec-label">Perovskita multicamada, eficiência de 34%</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">300W</span>
+                    <span class="spec-label">Potência equivalente (micro-ondas miniaturizado)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">5000 mAh</span>
+                    <span class="spec-label">Grafeno de alta densidade</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">120°C</span>
+                    <span class="spec-label">Temperatura Máxima — suficiente para qualquer alimento</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-valor">Bluetooth</span>
+                    <span class="spec-label">+ aplicativo para controle de tempo e potência</span>
+                </div>
+                <div class="spec-item full">
+                    <span class="spec-valor">Certificações</span>
+                    <span class="spec-label">ANATEL, INMETRO, CE, FCC</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Login / Registro -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="btn-close-login">&times;</span>
+
+            <!-- Formulário de Login -->
+            <div id="form-login">
+                <h2>Entrar</h2>
+                <input type="text" id="login-usuario" placeholder="Usuário ou Email">
+                <input type="password" id="login-senha" placeholder="Senha">
+                <button id="btn-login-submit">Entrar</button>
+                <p class="toggle-form">Não tem conta? <a href="#" id="link-register">Criar conta</a></p>
+                <p id="login-msg" class="msg"></p>
+            </div>
+
+            <!-- Formulário de Registro -->
+            <div id="form-register" style="display:none;">
+                <h2>Criar Conta</h2>
+                <input type="email" id="reg-email" placeholder="Email">
+                <input type="tel" id="reg-telefone" placeholder="Telefone">
+                <input type="text" id="reg-usuario" placeholder="Nome de usuário">
+                <input type="password" id="reg-senha" placeholder="Senha">
+                <button id="btn-register-submit">Criar Conta</button>
+                <p class="toggle-form">Já tem conta? <a href="#" id="link-login">Entrar</a></p>
+                <p id="register-msg" class="msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
