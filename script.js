@@ -170,6 +170,23 @@ function checkAuth() {
 
 checkAuth();
 
+// Menu mobile
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    // Fecha o menu ao clicar em um link
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+}
+
 // Verifica login ao clicar em comprar
 const navComprar = document.getElementById('nav-comprar');
 const btnComprarHero = document.getElementById('btn-comprar-hero');

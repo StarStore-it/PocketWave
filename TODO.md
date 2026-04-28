@@ -1,9 +1,15 @@
-# TODO - Correções Login
+# TODO - Responsividade Mobile
 
-- [x] Analisar arquivos do projeto
-- [x] Criar plano de correção
-- [x] Editar `index.html` — adicionar área de usuário logado no `<nav>`
-- [x] Editar `style.css` — ajustar navbar (esquerda/direita) e estilos de logout
-- [x] Editar `script.js` — localStorage, checkAuth, renderLoggedIn/Out, logout instantâneo no registro
-- [x] Testar servidor (`node server.js`)
+## Passos
+- [x] 1. Adicionar meta viewport em index.html, checkout.html e pedidos.html
+- [x] 2. Adicionar botão hambúrguer e estrutura de menu mobile nos 3 HTMLs
+- [x] 3. Atualizar script.js para controlar abertura/fechamento do menu mobile
+- [x] 4. Adicionar media queries no style.css para:
+  - [x] Navbar mobile (menu hambúrguer, links empilhados)
+  - [x] Hero section (reduzir fontes, padding, centralizar)
+  - [x] Especificações (reduzir grid e fontes)
+  - [x] Checkout (container full width, padding menor)
+  - [x] Pedidos (cards com padding menor, fontes menores)
+  - [x] Modal (ajustar para telas pequenas)
+- [x] 5. Testar visualmente
 

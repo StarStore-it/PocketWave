@@ -504,3 +504,190 @@ html {
     scroll-behavior: smooth;
 }
 
+/* MENU MOBILE */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    /* NAVBAR MOBILE */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 20px;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 999;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 20px;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .navbar ul.active {
+        display: flex;
+    }
+
+    .navbar a {
+        font-size: 16px;
+    }
+
+    /* HERO MOBILE */
+    .hero {
+        padding: 100px 20px 40px;
+        text-align: center;
+        justify-content: center;
+        background: url("img/microondas.png") no-repeat center center, url("img/fundoresto.png") no-repeat center center;
+        background-size: contain, cover;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
+    .content h2 {
+        font-size: 22px;
+    }
+
+    .content h1 {
+        font-size: 32px;
+    }
+
+    .content p {
+        font-size: 14px;
+    }
+
+    .btn-comprar {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    /* ESPECIFICAÇÕES MOBILE */
+    .especificacoes {
+        padding: 100px 20px 40px;
+    }
+
+    .especificacoes-content h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+
+    .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .spec-item {
+        padding: 20px 15px;
+    }
+
+    .spec-valor {
+        font-size: 18px;
+    }
+
+    .spec-label {
+        font-size: 12px;
+    }
+
+    /* CHECKOUT MOBILE */
+    .checkout-section {
+        padding: 100px 15px 40px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .checkout-container {
+        width: 100%;
+        padding: 25px 20px;
+    }
+
+    .checkout-container h2 {
+        font-size: 22px;
+    }
+
+    /* PEDIDOS MOBILE */
+    .pedidos-section {
+        padding: 100px 15px 40px;
+    }
+
+    .pedidos-container h2 {
+        font-size: 26px;
+    }
+
+    .pedido-card {
+        padding: 18px 15px;
+    }
+
+    .pedido-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .pedido-numero {
+        font-size: 16px;
+    }
+
+    .pedido-info p {
+        font-size: 13px;
+    }
+
+    /* MODAL MOBILE */
+    .modal-content {
+        width: 90%;
+        padding: 25px 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 20px;
+    }
+
+    .modal-content input {
+        font-size: 16px; /* evita zoom no iOS */
+    }
+}
+
+@media (max-width: 480px) {
+    .content h1 {
+        font-size: 26px;
+    }
+
+    .content h2 {
+        font-size: 18px;
+    }
+
+    .especificacoes-content h2 {
+        font-size: 22px;
+    }
+
+    .pedidos-container h2 {
+        font-size: 22px;
+    }
+
+    .checkout-container h2 {
+        font-size: 20px;
+    }
+}
+
