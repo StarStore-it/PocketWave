@@ -26,10 +26,17 @@
         <div class="checkout-container">
             <h2>Finalizar Compra</h2>
             <p class="checkout-subtitle">Pocket Wave - Micro-ondas Portátil</p>
+            <p class="checkout-preco">R$ 400,00</p>
             
             <form id="checkout-form">
                 <label for="checkout-nome">Nome Completo</label>
                 <input type="text" id="checkout-nome" placeholder="Digite seu nome completo" required>
+
+                <label for="checkout-email">Email</label>
+                <input type="email" id="checkout-email" placeholder="Digite seu email" required>
+
+                <label for="checkout-telefone">Telefone</label>
+                <input type="tel" id="checkout-telefone" placeholder="Digite seu telefone" required>
 
                 <label>Meio de Pagamento</label>
                 <div class="payment-options">
@@ -82,6 +89,27 @@
 
     <script src="script.js"></script>
     <script>
+        // Fetch user data and pre-fill form
+        async function preencherDadosUsuario() {
+            const usuario = localStorage.getItem('pocketwave_user');
+            if (!usuario) return;
+
+            try {
+                const res = await fetch('/api/logins');
+                const logins = await res.json();
+                const userData = logins.find(l => l.usuario === usuario);
+                if (userData) {
+                    document.getElementById('checkout-nome').value = userData.usuario || '';
+                    document.getElementById('checkout-email').value = userData.email || '';
+                    document.getElementById('checkout-telefone').value = userData.telefone || '';
+                }
+            } catch (e) {
+                console.error('Erro ao carregar dados do usuário:', e);
+            }
+        }
+
+        preencherDadosUsuario();
+
         // Checkout specific logic
         const checkoutForm = document.getElementById('checkout-form');
         const checkoutMsg = document.getElementById('checkout-msg');
@@ -89,6 +117,8 @@
         checkoutForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const nome = document.getElementById('checkout-nome').value.trim();
+            const email = document.getElementById('checkout-email').value.trim();
+            const telefone = document.getElementById('checkout-telefone').value.trim();
             const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
             const usuario = localStorage.getItem('pocketwave_user');
 
@@ -98,7 +128,7 @@
                 return;
             }
 
-            const result = await apiPost('/api/pedido', { usuario, nome, pagamento, produto: 'Pocket Wave' });
+            const result = await apiPost('/api/pedido', { usuario, nome, email, telefone, pagamento, produto: 'Pocket Wave' });
             if (result.ok) {
                 checkoutMsg.textContent = 'Pedido realizado com sucesso!';
                 checkoutMsg.className = 'msg success';

@@ -146,14 +146,14 @@ const server = http.createServer((req, res) => {
         req.on('data', chunk => body += chunk);
         req.on('end', () => {
             try {
-                const { usuario, nome, pagamento, produto } = JSON.parse(body);
+                const { usuario, nome, email, telefone, pagamento, produto } = JSON.parse(body);
                 if (!usuario || !nome || !pagamento || !produto) {
                     res.writeHead(400, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Preencha todos os campos.' }));
                     return;
                 }
                 const pedidos = readPedidos();
-                pedidos.push({ usuario, nome, pagamento, produto, data: new Date().toISOString() });
+                pedidos.push({ usuario, nome, email, telefone, pagamento, produto, data: new Date().toISOString() });
                 savePedidos(pedidos);
                 res.writeHead(201, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ message: 'Pedido realizado com sucesso!' }));

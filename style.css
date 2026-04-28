@@ -8,6 +8,7 @@
 body {
     height: 100vh;
     color: white;
+    background-color: black;
 }
 
 /* NAVBAR */
@@ -75,9 +76,9 @@ body {
     display: flex;
     align-items: center;
     padding-left: 80px;
-
-    background: url("img/fundoinicio.png") no-repeat center right;
-    background-size: cover;
+    background-color: black;
+    background: url("img/microondas.png") no-repeat center center, url("img/fundoresto.png") no-repeat center center;
+    background-size: contain, cover;
 }
 
 /* CONTEÚDO */
@@ -239,6 +240,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: black;
     background: url("img/fundoresto.png") no-repeat center center;
     background-size: cover;
 }
@@ -262,6 +264,14 @@ body {
     text-align: center;
     color: #bbb;
     font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.checkout-preco {
+    text-align: center;
+    color: #a66cff;
+    font-size: 28px;
+    font-weight: bold;
     margin-bottom: 25px;
 }
 
@@ -272,7 +282,9 @@ body {
     color: #ccc;
 }
 
-.checkout-container input[type="text"] {
+.checkout-container input[type="text"],
+.checkout-container input[type="email"],
+.checkout-container input[type="tel"] {
     width: 100%;
     padding: 10px 12px;
     margin-bottom: 18px;
@@ -284,7 +296,9 @@ body {
     outline: none;
 }
 
-.checkout-container input[type="text"]::placeholder {
+.checkout-container input[type="text"]::placeholder,
+.checkout-container input[type="email"]::placeholder,
+.checkout-container input[type="tel"]::placeholder {
     color: #888;
 }
 
@@ -343,6 +357,7 @@ body {
 .pedidos-section {
     min-height: 100vh;
     padding: 100px 40px 40px;
+    background-color: black;
     background: url("img/fundoresto.png") no-repeat center center;
     background-size: cover;
 }
@@ -444,6 +459,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 80px 40px;
+    background-color: black;
     background: url("img/fundoresto.png") no-repeat center right;
     background-size: cover;
 }

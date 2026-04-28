@@ -87,6 +87,8 @@
                         <div class="pedido-info">
                             <p><strong>Cliente:</strong> ${pedido.nome}</p>
                             <p><strong>Usuário:</strong> ${pedido.usuario}</p>
+                            <p><strong>Email:</strong> ${pedido.email || '-'}</p>
+                            <p><strong>Telefone:</strong> ${pedido.telefone || '-'}</p>
                             <p><strong>Produto:</strong> ${pedido.produto}</p>
                             <p><strong>Pagamento:</strong> ${pedido.pagamento.toUpperCase()}</p>
                         </div>
